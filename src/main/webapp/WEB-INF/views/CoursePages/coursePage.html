@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+
+
+<table class="table table-warning table-hover" >
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Course</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Update</th> <a  class="btn btn-outline-primary" th:href="@{{id}/new (id=${companyId})}">+add new</a>
+    </tr>
+    </thead>
+    <tbody th:each="course:${courses}">
+
+    <tr>
+        <th scope="row" th:text="${course.id}"></th>
+        <td><a th:href="@{/{id}(id=${course.getId()})}" style="color: black" th:text="${course.name}"></a></td>
+        <td th:text="${course.duration}"></td>
+
+        <td>
+            <form th:method="DELETE" th:action="@{{id}/{id1}/delete (id=${companyId}, id1=${course.id})}">
+                <input type="submit" class="btn btn-primary" th:value="delete">
+            </form>
+        </td>
+        <td>
+
+            <a class="btn btn-primary" role="button" th:href="@{/courses/{id}/{id2}/editCourse (id2=${course.id}, id=${companyId})}"
+               th:value="update">update</a>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+<h2>Groups</h2>
+<table class="table table-warning table-hover">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Group name</th>
+        <th scope="col">Date of start</th>
+        <th scope="col">Date of Finis</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Update</th><a class="btn btn-outline-primary" role="button" th:href="@{{id}/newGroup(id=${companyId})} ">Add Group</a>
+    </tr>
+    </thead>
+    <tbody th:each="gr:${groups}">
+    <tr>
+        <th scope="row" th:text="${gr.id}"></th>
+        <td><a th:href="@{/students/{id}(id=${gr.getId()})}" style="color: black" th:text="${gr.name}"></a></td>
+        <td th:text="${gr.dateOfStart}"></td>
+        <td th:text="${gr.dateOfFinis}"></td>
+
+        <td>
+            <form th:method="DELETE" th:action="@{{id}/{id1}/deleteGroup (id=${companyId}, id1=${gr.id})}">
+                <input type="submit" class="btn btn-primary" th:value="delete">
+            </form>
+        </td>
+        <td>
+
+            <a class="btn btn-primary" role="button" th:href="@{/courses/{id}/{id2}/editGroup (id2=${gr.id}, id=${companyId})}"
+               th:value="update">update</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Teacer</h2>
+<table class="table table-warning table-hover">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Teacer name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">email</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Update</th><a class="btn btn-outline-primary" role="button" th:href="@{{id}/newTeacher(id=${companyId})} ">Add Teacher</a>
+    </tr>
+    </thead>
+    <tbody th:each="teacher:${teachers}">
+    <tr>
+        <th scope="row" th:text="${teacher.id}"></th>
+        <td th:text="${teacher.firstName}"></td>
+        <td th:text="${teacher.lastName}"></td>
+        <td th:text="${teacher.email}"></td>
+        <td>
+            <form th:method="DELETE" th:action="@{/courses/{id}/{idTc}/deleteTeacher (id=${companyId}, idTc=${teacher.id})}">
+                <input type="submit" class="btn btn-primary" th:value="delete">
+            </form>
+        </td>
+        <td>
+
+            <a class="btn btn-primary" role="button" th:href="@{/courses/{id}/editTeacher/{id2} (id2=${teacher.id}, id=${companyId})}"
+               th:value="update">update</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
