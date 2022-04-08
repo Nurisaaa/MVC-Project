@@ -18,6 +18,7 @@ public class CompanyServiceImpl implements CompanyService{
 
     @Autowired
     public CompanyServiceImpl(CompanyDao companyDao) {
+        System.out.println("");
         this.companyDao = companyDao;
     }
 
